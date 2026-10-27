@@ -1,4 +1,17 @@
 services:
+  init_state:
+    image: ghcr.io/matty03072/mediaautopilot:v1.0.2@sha256:29b153ecb9c5dd84705c1e018338285adcd8a9f4f77d7046b57cc2623a7b2d67
+    user: "0:0"
+    entrypoint: [python, -c]
+    command: ["import os; os.chown('/state', 1000, 1000); os.chmod('/state', 0o700)"]
+    restart: "no"
+    network_mode: none
+    read_only: true
+    volumes:
+      - ${APP_DATA_DIR}/data/state:/state
+    cap_drop: [ALL]
+    cap_add: [CHOWN, FOWNER]
+    security_opt: [no-new-privileges:true]
   app_proxy:
     environment:
       APP_HOST: mediaautopilot-map_web_1
@@ -8,6 +21,9 @@ services:
     user: "1000:1000"
     init: true
     restart: on-failure
+    depends_on:
+      init_state:
+        condition: service_completed_successfully
     environment:
       UMBREL_BOOTSTRAP_PASSWORD: ${APP_PASSWORD}
       PUBLIC_URL: http://${DEVICE_DOMAIN_NAME}:${APP_PROXY_PORT}

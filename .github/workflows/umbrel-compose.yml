@@ -1,0 +1,55 @@
+name: Umbrel compose acceptance
+on:
+  push:
+    branches: [main, fix/umbrel-state-permissions]
+    paths: ['mediaautopilot-map/**', '.github/workflows/umbrel-compose.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  state-permissions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exercise fresh root-owned state, startup and restart
+        shell: bash
+        run: |
+          set -euo pipefail
+          export APP_DATA_DIR="$RUNNER_TEMP/map-state-fixture"
+          export APP_PASSWORD="$(openssl rand -hex 32)"
+          export DEVICE_DOMAIN_NAME=localhost APP_PROXY_PORT=18100
+          export COMPOSE_PROJECT_NAME=map-acceptance
+          sudo mkdir -p "$APP_DATA_DIR/data/state"
+          sudo chown root:root "$APP_DATA_DIR/data/state"
+          sudo chmod 755 "$APP_DATA_DIR/data/state"
+          python3 -m pip install pyyaml
+          python3 - <<'PY'
+          import yaml
+          from pathlib import Path
+          cfg=yaml.safe_load(Path('mediaautopilot-map/docker-compose.yml').read_text())
+          del cfg['services']['app_proxy']
+          cfg['services']['web']['ports']=['127.0.0.1:18100:8099']
+          for name in ('web','worker'):
+              cfg['services'][name]['environment']['MAP_INSTALL_ACTIVITY_DISABLED']='1'
+          Path('compose-test.yml').write_text(yaml.safe_dump(cfg))
+          PY
+          image=$(python3 -c "import yaml; print(yaml.safe_load(open('compose-test.yml'))['services']['web']['image'])")
+          docker pull "$image"
+          # Reproduce the original failure without preparing Docker's bind directory.
+          if docker run --rm --user 1000:1000 -v "$APP_DATA_DIR/data/state:/state" --entrypoint python "$image" -c "open('/state/.initialize.lock','a').close()" 2>before-error.txt; then
+            echo 'Expected root-owned bind mount to reject non-root write'; exit 1
+          fi
+          grep -q PermissionError before-error.txt
+          docker compose -f compose-test.yml up -d --wait --wait-timeout 120
+          test "$(stat -c '%u:%g:%a' "$APP_DATA_DIR/data/state")" = '1000:1000:700'
+          curl -fsS http://127.0.0.1:18100/health | python3 -c 'import json,sys; assert json.load(sys.stdin)["version"]=="1.0.2"'
+          config_before=$(sudo sha256sum "$APP_DATA_DIR/data/state/config.json")
+          docker compose -f compose-test.yml down
+          docker compose -f compose-test.yml up -d --wait --wait-timeout 120
+          test "$config_before" = "$(sudo sha256sum "$APP_DATA_DIR/data/state/config.json")"
+          docker compose -f compose-test.yml exec -T worker python -c 'import json,os,sqlite3,time; from pathlib import Path; cfg=json.loads(Path(os.environ["MAP_CONFIG"]).read_text()); c=sqlite3.connect(cfg["DATABASE_URL"].removeprefix("sqlite:///")); row=c.execute("SELECT value FROM sh_settings WHERE key=?",("worker_seen",)).fetchone(); assert row and float(row[0])>time.time()-90'
+          echo 'PASS root-owned failure reproduced; initialization, web health, worker heartbeat and restart retention verified'
+      - name: Collect startup diagnostics
+        if: failure()
+        run: docker compose -f compose-test.yml logs --tail 50
