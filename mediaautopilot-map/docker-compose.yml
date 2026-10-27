@@ -4,7 +4,7 @@ services:
       APP_HOST: mediaautopilot-map_web_1
       APP_PORT: 8099
   web:
-    image: ghcr.io/matty03072/mediaautopilot:v1.0.1@sha256:b3d66b12920bdcddbcac82c160c11ba869b1d1e5673cc7e52bc54a56282f22f0
+    image: ghcr.io/matty03072/mediaautopilot:v1.0.2@sha256:29b153ecb9c5dd84705c1e018338285adcd8a9f4f77d7046b57cc2623a7b2d67
     user: "1000:1000"
     init: true
     restart: on-failure
@@ -21,7 +21,7 @@ services:
     cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
   worker:
-    image: ghcr.io/matty03072/mediaautopilot:v1.0.1@sha256:b3d66b12920bdcddbcac82c160c11ba869b1d1e5673cc7e52bc54a56282f22f0
+    image: ghcr.io/matty03072/mediaautopilot:v1.0.2@sha256:29b153ecb9c5dd84705c1e018338285adcd8a9f4f77d7046b57cc2623a7b2d67
     command: [worker]
     user: "1000:1000"
     init: true

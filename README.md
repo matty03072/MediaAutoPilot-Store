@@ -6,7 +6,7 @@
 <p align="center"><strong>Media. Users. Automated.</strong><br>Self-hosted Emby and Jellyfin account management.</p>
 <p align="center">
   <a href="https://www.mediaautopilot.co.uk">Website</a> ·
-  <a href="https://github.com/matty03072/MediaAutoPilot-Store/releases/tag/installers-1.0.1">Download 1.0.1</a> ·
+  <a href="https://github.com/matty03072/MediaAutoPilot-Store/releases/tag/installers-1.0.2">Download 1.0.2</a> ·
   <a href="https://www.mediaautopilot.co.uk/install">Installation guide</a> ·
   <a href="https://www.mediaautopilot.co.uk/map/account">Licence account</a>
 </p>
@@ -21,15 +21,15 @@ Media Auto Pilot brings invitations, media-server accounts, library permissions,
 
 [Automatic setup](#automatic-setup-from-one-invitation) · [Interface gallery](#interface-gallery) · [Install](#install) · [Licensing](#free-for-ten-members-room-to-grow) · [Support](#help-and-support)
 
-## Download MAP 1.0.1
+## Download MAP 1.0.2
 
 | Platform | Download | Details |
 |---|---|---|
-| **Windows x64** | [Download installer](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.1/MAP-1.0.1-windows-x64-setup.exe) | Standalone setup; run as administrator |
-| **Ubuntu 24.04 x64** | [Download archive](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.1/MAP-1.0.1-linux-x64.tar.gz) | systemd and CPython 3.12 required |
+| **Windows x64** | [Download installer](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.2/MAP-1.0.2-windows-x64-setup.exe) | Standalone setup; run as administrator |
+| **Ubuntu 24.04 x64** | [Download archive](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.2/MAP-1.0.2-linux-x64.tar.gz) | systemd and CPython 3.12 required |
 | **umbrelOS community store** | [Installation steps](#umbrelos) | AMD64 and ARM64 images; separate community preview |
 
-[SHA-256 checksums](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.1/SHA256SUMS.txt) · [Release notes](docs/RELEASE-1.0.1.md)
+[SHA-256 checksums](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.2/SHA256SUMS.txt) · [Release notes](docs/RELEASE-1.0.2.md)
 
 **MAP is a separate installation, not an MPS update.** Do not install it over MPS or share MPS databases, configuration or state folders.
 
@@ -64,7 +64,7 @@ Available actions depend on the services you connect and the permissions assigne
 
 ## Interface gallery
 
-These screenshots show the **MAP 1.0.1 application running with isolated demonstration accounts**. They contain no live customer data or connected-service credentials. They are source-fixture captures, not screenshots of an installed compiled package; service-dependent screens will reflect your own setup.
+These screenshots show the **MAP 1.0.2 application running with isolated demonstration accounts**. They contain no live customer data or connected-service credentials. They are source-fixture captures, not screenshots of an installed compiled package; service-dependent screens will reflect your own setup.
 
 ### Member dashboard
 
@@ -124,7 +124,7 @@ Role-restricted guides cover configuration and administration. Member and admini
 
 ### Windows x64
 
-1. [Download the MAP 1.0.1 installer](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.1/MAP-1.0.1-windows-x64-setup.exe) and check its [SHA-256 hash](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.1/SHA256SUMS.txt).
+1. [Download the MAP 1.0.2 installer](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.2/MAP-1.0.2-windows-x64-setup.exe) and check its [SHA-256 hash](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.2/SHA256SUMS.txt).
 2. Run the installer as administrator. The installer is unsigned.
 3. Follow setup. A new standalone installation uses SQLite; see the [installation guide](https://www.mediaautopilot.co.uk/install).
 4. Open **http://localhost:8099/setup**. Read the one-hour setup code from `C:\ProgramData\MAP\data\setup-code.txt` using an elevated text editor, then claim your owner account and enrol MFA.
@@ -134,7 +134,7 @@ MAP uses its own service names and data directories. Do not point it at an MPS d
 
 ### Linux — Ubuntu 24.04 x64
 
-1. [Download the Linux archive](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.1/MAP-1.0.1-linux-x64.tar.gz) and verify the checksum.
+1. [Download the Linux archive](https://github.com/matty03072/MediaAutoPilot-Store/releases/download/installers-1.0.2/MAP-1.0.2-linux-x64.tar.gz) and verify the checksum.
 2. Extract it and open a terminal in the extracted directory.
 3. With **systemd and CPython 3.12** available, run:
 
@@ -191,8 +191,8 @@ This public repository contains **distribution metadata, documentation, screensh
 ## Help and support
 
 - [Installation guide](https://www.mediaautopilot.co.uk/install)
-- [Release notes and verification limits](docs/RELEASE-1.0.1.md)
-- [Downloads and checksums](https://github.com/matty03072/MediaAutoPilot-Store/releases/tag/installers-1.0.1)
+- [Release notes and verification limits](docs/RELEASE-1.0.2.md)
+- [Downloads and checksums](https://github.com/matty03072/MediaAutoPilot-Store/releases/tag/installers-1.0.2)
 - [Signed-in licence support](https://www.mediaautopilot.co.uk/map/support)
 - [Report an issue](https://github.com/matty03072/MediaAutoPilot-Store/issues) — do not include credentials or private member information.
 

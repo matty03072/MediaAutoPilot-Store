@@ -4,7 +4,7 @@ storage:
   dataRoot: data
 category: media
 name: Media Auto Pilot
-version: "1.0.1"
+version: "1.0.2"
 tagline: Automated Emby and Jellyfin user management
 description: >-
   Media Auto Pilot (MAP) automates invited accounts, library access, shared-password
@@ -22,9 +22,10 @@ description: >-
   remains behind Umbrel login. Public member access requires a separate HTTPS setup.
   Real on-device umbrelOS installation remains unverified; this is a community preview.
 releaseNotes: >-
-  First MAP release, based on MPS customer 1.0.4. New branding, separate licensing,
-  no member billing, and the same automated media-account management capabilities.
-  See the release notes for verified platforms and remaining acceptance limits.
+  Fix administrator account setup incorrectly reporting that the member allowance
+  was exceeded and blocking Discover and request. Queued administrator setup now
+  participates in the allowance before external accounts are created. Existing
+  licence, verification and disabled-account restrictions remain enforced.
 developer: matty03072
 website: https://www.mediaautopilot.co.uk
 repo: https://github.com/matty03072/MediaAutoPilot-Store
