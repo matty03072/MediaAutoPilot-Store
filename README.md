@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Media Auto Pilot</h1>
-<p align="center"><strong>Media. Users. Automated.</strong><br>Self-hosted Emby and Jellyfin account management — without member billing.</p>
+<p align="center"><strong>Media. Users. Automated.</strong><br>Self-hosted Emby and Jellyfin account management.</p>
 <p align="center">
   <a href="https://www.mediaautopilot.co.uk">Website</a> ·
   <a href="https://github.com/matty03072/MediaAutoPilot-Store/releases/tag/installers-1.0.1">Download 1.0.1</a> ·
@@ -18,8 +18,6 @@
 **Send an invitation. Your member signs up. MAP handles the normal account setup and access across your connected services.**
 
 Media Auto Pilot brings invitations, media-server accounts, library permissions, requests and account maintenance into one portal on your own server. Connect **Emby, Jellyfin, Emby Connect, Ombi, Sonarr, Radarr and SMTP email** once, then manage your community from one place.
-
-**No member checkout. No monthly member plans. No Admin Revenue screen.** MAP manages users and access; it does not charge your members. The optional paid subscription is for your MAP software licence, not their media access.
 
 [Automatic setup](#automatic-setup-from-one-invitation) · [Interface gallery](#interface-gallery) · [Install](#install) · [Licensing](#free-for-ten-members-room-to-grow) · [Support](#help-and-support)
 
