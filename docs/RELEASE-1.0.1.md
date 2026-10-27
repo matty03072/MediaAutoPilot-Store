@@ -21,7 +21,7 @@ Download `MAP-1.0.1-windows-x64-setup.exe` or `MAP-1.0.1-linux-x64.tar.gz` with 
 - 121 customer regression/product tests, 50 installer/setup tests, 79 issuer tests.
 - Windows x64 and Ubuntu 24.04 x64 native build, payload/source audit, clean install, same-version repair, real web/worker services, restart and data-preserving uninstall passed in CI.
 - Downloaded Linux archive: 131 manifest hashes and first-party source exclusion checked again. Published installer hashes are supplied separately.
-- AMD64 and ARM64 container builds, every-layer source audit, compiled-runtime tests and web/worker restart checks passed before publication. Anonymous registry verification is required before the public community manifest is activated.
+- AMD64 and ARM64 container builds, every-layer source audit, compiled-runtime tests and web/worker restart checks passed before publication. Anonymous public pulls, every-layer audit and web/worker runtime checks also passed on both architectures; the community manifest pins the verified image digest.
 - MAP reporting/isolation checks passed locally and on the Windows host. Customer, website and Beta owner screens were checked at desktop/mobile widths using isolated fixtures.
 
 First-party runtime code is compiled; the release excludes first-party Python source/bytecode and build intermediates. This is not a guarantee against reverse engineering. The public repository contains distribution documentation and metadata, not private application source.
