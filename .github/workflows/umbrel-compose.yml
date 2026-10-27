@@ -48,7 +48,19 @@ jobs:
           docker compose -f compose-test.yml down
           docker compose -f compose-test.yml up -d --wait --wait-timeout 120
           test "$config_before" = "$(sudo sha256sum "$APP_DATA_DIR/data/state/config.json")"
-          docker compose -f compose-test.yml exec -T worker python -c 'import json,os,sqlite3,time; from pathlib import Path; cfg=json.loads(Path(os.environ["MAP_CONFIG"]).read_text()); c=sqlite3.connect(cfg["DATABASE_URL"].removeprefix("sqlite:///")); row=c.execute("SELECT value FROM sh_settings WHERE key=?",("worker_seen",)).fetchone(); assert row and float(row[0])>time.time()-90'
+          docker compose -f compose-test.yml exec -T worker python - <<'PY'
+          import json,os,sqlite3,time
+          from pathlib import Path
+          cfg=json.loads(Path(os.environ['MAP_CONFIG']).read_text())
+          c=sqlite3.connect(cfg['DATABASE_URL'].removeprefix('sqlite:///'))
+          for attempt in range(30):
+              row=c.execute('SELECT value FROM sh_settings WHERE key=?',('worker_seen',)).fetchone()
+              if row and float(row[0])>time.time()-30:
+                  break
+              time.sleep(1)
+          else:
+              raise AssertionError('Worker heartbeat did not become ready')
+          PY
           echo 'PASS root-owned failure reproduced; initialization, web health, worker heartbeat and restart retention verified'
       - name: Collect startup diagnostics
         if: failure()
