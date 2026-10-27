@@ -1,0 +1,44 @@
+manifestVersion: 1
+id: mediaautopilot-map
+storage:
+  dataRoot: data
+category: media
+name: Media Auto Pilot
+version: "1.0.1"
+tagline: Automated Emby and Jellyfin user management
+description: >-
+  Media Auto Pilot (MAP) automates invited accounts, library access, shared-password
+  updates and account cleanup across Emby, Jellyfin and Ombi. Connect Sonarr and
+  Radarr for media management and request progress. Administrator MFA is required.
+
+  MAP does not include member billing, monthly member plans or administrator revenue.
+  Free for up to ten managed members. A separate MAP software licence unlocks larger
+  communities: GBP 5/month for up to three installations. Online licence checks and
+  minimal installation activity reporting remain enabled; no member details or media
+  activity are included in installation reports.
+
+  First-party runtime source is compiled and is not distributed with the application.
+  Install MAP separately from MPS; do not reuse MPS state or databases. Default access
+  remains behind Umbrel login. Public member access requires a separate HTTPS setup.
+  Real on-device umbrelOS installation remains unverified; this is a community preview.
+releaseNotes: >-
+  First MAP release, based on MPS customer 1.0.4. New branding, separate licensing,
+  no member billing, and the same automated media-account management capabilities.
+  See the release notes for verified platforms and remaining acceptance limits.
+developer: matty03072
+website: https://www.mediaautopilot.co.uk
+repo: https://github.com/matty03072/MediaAutoPilot-Store
+support: https://github.com/matty03072/MediaAutoPilot-Store/issues
+dependencies: []
+port: 18100
+gallery:
+  - https://raw.githubusercontent.com/matty03072/MediaAutoPilot-Store/main/assets/overview.png
+  - https://raw.githubusercontent.com/matty03072/MediaAutoPilot-Store/main/assets/member.png
+  - https://raw.githubusercontent.com/matty03072/MediaAutoPilot-Store/main/assets/invitations.png
+path: /setup
+defaultUsername: owner
+defaultPassword: ""
+deterministicPassword: true
+submitter: matty03072
+submission: https://github.com/matty03072/MediaAutoPilot-Store
+icon: https://raw.githubusercontent.com/matty03072/MediaAutoPilot-Store/main/assets/map-icon.png
